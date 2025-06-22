@@ -1,0 +1,50 @@
+
+body{
+    /* background-image: url("Images/restaurant.jpg"); */
+    text-align: center;
+    max-width: 50%;
+    margin: auto;
+}
+
+
+.logo{
+ text-align: center;
+ background-color: black;
+ color:rgba(235, 91, 48, 0.733) ;
+ padding: 1%;
+}
+
+.header-img{
+    border-radius: 100px;
+}
+h1{
+    /* color: rgb(67, 185, 233); */
+    font-size: 4rem;
+}
+h2{
+    /* color: rgb(67, 185, 233); */
+    font-size: 2rem;
+    font-style: italic;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+a:hover {
+        text-decoration: underline;
+    }
+
+img{
+    display: inline-block;
+}    
+
+.menu-bubble{
+    display: block;
+    border: 5px solid rgba(235, 91, 48, 0.733);
+    background-color:rgba(235, 91, 48, 0.733) ;
+    border-radius: 8px;
+    width: 55%;
+    margin: 8px auto;
+    font-size: larger;
+}
+
