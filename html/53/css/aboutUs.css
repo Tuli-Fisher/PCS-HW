@@ -1,0 +1,17 @@
+body{
+    background-image: url("images/restaurant.jpg");
+}
+
+.promo{
+  
+   /* margin: 5em; */
+   display: inline-block;
+   width: 50%;
+   
+}
+
+p{
+    display: inline-block;
+    width: 48%;
+
+}
