@@ -24,6 +24,10 @@ body{
     box-sizing: border-box;
 }
 
+main{
+    width: 82%;
+    display: inline-block;
+}
 .menu-img img{
     /* display: flex;
     align-items: center;
