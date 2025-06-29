@@ -1,0 +1,166 @@
+
+html{
+    background-color: white;
+}
+
+body{
+    text-align: center;
+    /* max-width: 90%; */
+margin: auto;
+ background-color:rgba(235, 91, 48, 0.2) ;
+}
+
+.logo{
+    background-image: url("../images/salad2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover ;
+
+    padding-bottom: 1em;
+    margin-bottom: 5px;
+
+    /* color:rgb(185 49 8) ; */
+    
+    
+    height: 350px;
+}
+
+/* .logo-img{
+    opacity: .2;
+
+    height: 300px;
+    width: 85%;
+    object-fit: cover;
+} */
+
+.logo-text{
+
+    background-color: rgba(216, 214, 214, 0.733);
+    color:rgb(185 49 8);
+    /* font-family: monoton-regular, sans-serif; */
+
+    height: 120px;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    left:0;
+    margin: auto;
+}
+
+.logo-text h1{
+    position: absolute;
+    top: 3px;
+    right: 0;
+    left:0;
+    margin: auto;
+}
+
+.logo-text h2{
+    position: absolute;
+    top: 75px;
+    right: 0;
+    left:0;
+    margin: auto;
+}
+
+.aboutUs-link{
+    position: absolute;
+    top: 50px;
+    left: 5%;
+}
+
+.contact-link{
+    position: absolute;
+    top: 50px;
+    left: 21%;
+}
+.address-link{
+    position: absolute;
+    top: 50px;
+    right: 21%;
+}
+
+.menu-link{
+    position: absolute;
+    top: 50px;
+    right: 6%;
+}
+
+@media ( max-width: 800px) {
+    .aboutUs-link{
+        top: 100px;
+        left: 2%;
+    }
+    .address-link{
+         top: 100px;
+         right: 31%;
+    }
+    .contact-link{
+        top: 100px;
+        left: 32%;
+    }
+    .menu-link{
+        top: 100px;
+        right:5%;
+    }
+    .logo-text h2{
+        display: none;
+    }
+}
+
+a{
+text-decoration: none;
+color: inherit;
+font-weight: 700;
+}
+
+a:hover {
+ text-decoration: underline;
+  font-weight: bolder;
+  
+}
+
+.logo-text h1{
+    font-size: xxx-large;
+}
+
+.logo-text h2{
+    font-size: 2em;
+    font-family: italic;
+}
+.intro-p{
+    background-color:rgba(235, 91, 48, 0.4) ;
+    border: 2px solid rgba(235, 91, 48, 0.4);
+    border-radius: 8px;
+    
+    text-transform: capitalize;
+    margin: 1em;
+    padding: 2em;
+    font-family: 'Courier New', Courier, monospace;
+}
+.monoton-regular {
+  font-family: "Monoton", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.menu-bubble{
+    display: block;
+    border: 5px solid rgba(235, 91, 48, 0.733);
+    background-color:rgba(235, 91, 48, 0.733) ;
+    border-radius: 8px;
+    width: 55%;
+    margin: 8px auto;
+    font-size: larger;
+}
+.menu-bubble:hover{
+    font-weight: bold;
+    margin: px auto;
+    border: 8px solid rgba(235, 91, 48, 0.733);
+}
+
+footer{
+    border-top: 1px solid rgb(185 49 8);
+    padding: .5em;
+}
