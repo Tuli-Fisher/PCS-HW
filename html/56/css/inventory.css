@@ -1,0 +1,41 @@
+
+h2{
+    text-align: center;
+    text-decoration: underline;
+}
+table{
+    border-collapse: collapse;
+    width:75%;
+    margin: auto;
+}
+
+th,td{
+    border: 1px solid black;  
+}
+
+tbody td:not(:first-child){ 
+    text-align: right;
+}
+
+tfoot td{
+    text-align: center;
+}
+
+td:first-child{
+    font-weight: bold;
+}
+
+[ammt-low]{
+    background-color: red;
+}
+
+thead{
+    background-color: lightcoral;
+}
+
+tr:nth-child(2n){
+    background-color: lightblue;
+}
+tbody tr:hover{
+    background-color: aqua;
+}

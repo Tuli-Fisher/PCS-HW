@@ -1,0 +1,25 @@
+
+body{
+    width: 90%;
+    
+}
+header{
+    background-image: url(../images/salad2-resized.jpg);
+    background-repeat: no-repeat;
+    background-position: 10% 23%;
+    color: #b93108;
+    height: 150px;
+}
+
+header h4{
+    font-size: larger;
+    
+}
+
+input{
+    margin: 1em;
+}
+
+label{
+    color: #b93108;
+}
