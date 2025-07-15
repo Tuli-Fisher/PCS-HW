@@ -10,15 +10,20 @@
         grid-template-areas:
           "one two three"
           "four five six";
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 250px);
         grid-template-rows: repeat(2, 250px);
 
         gap: 1em;
+        margin: 3em;
+
+        
       }
 
       .grid > div{
         border: 2px solid black;
         border-radius: 20px;
+
+        box-shadow: 6px 6px black;
       }
       .grid2 {
         display: grid;
@@ -36,6 +41,10 @@
         justify-content: center;
       }
 
+      .grid > div:hover{
+        transition: 1s;
+         box-shadow: 1px 1px black;
+      }
       div:nth-child(1) {
         grid-area: one;
       }
