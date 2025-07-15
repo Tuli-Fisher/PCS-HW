@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .grid {
+        display: grid;
+        grid-template-areas:
+          "one two three"
+          "four five six";
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 250px);
+
+        gap: 1em;
+      }
+
+      .grid > div{
+        border: 2px solid black;
+        border-radius: 20px;
+      }
+      .grid2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-template-areas:
+        'one two '
+        'three four'
+        'five six';
+      }
+
+      .grid2 > div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      div:nth-child(1) {
+        grid-area: one;
+      }
+
+      div:nth-child(2) {
+        grid-area: two;
+      }
+
+      div:nth-child(3) {
+        grid-area: three;
+      }
+
+      div:nth-child(4) {
+        grid-area: four;
+      }
+
+      div:nth-child(5) {
+        grid-area: five;
+      }
+
+      div:nth-child(6) {
+        grid-area: six;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <h2>this is my dice</h2>
+    <div class="grid">
+      <div class="one grid2">
+        <div><img src="circle.jpg" alt="circle"></div>
+      </div>
+      <div class="two grid2">
+        <div><img src="circle.jpg" alt="circle"></div>
+        <div><img src="circle.jpg" alt="circle"></div>
+      </div>
+      <div class="three grid2">
+        <div><img src="circle.jpg" alt="circle"></div>
+       <div><img src="circle.jpg" alt="circle"></div>
+       <div><img src="circle.jpg" alt="circle"></div>
+      </div>
+      <div class="four grid2">
+       <div><img src="circle.jpg" alt="circle"></div>
+       <div><img src="circle.jpg" alt="circle"></div>
+       <div><img src="circle.jpg" alt="circle"></div>
+       <div><img src="circle.jpg" alt="circle"></div>
+      </div>
+      <div class="five grid2">
+       <div><img src="circle.jpg" alt="circle"></div>
+       <div><img src="circle.jpg" alt="circle"></div>
+       <div><img src="circle.jpg" alt="circle"></div>
+       <div><img src="circle.jpg" alt="circle"></div>
+       <div><img src="circle.jpg" alt="circle"></div>
+      </div>
+      <div class="six grid2">
+        <div><img src="circle.jpg" alt="circle"></div>
+        <div><img src="circle.jpg" alt="circle"></div>
+        <div><img src="circle.jpg" alt="circle"></div>
+        <div><img src="circle.jpg" alt="circle"></div>
+        <div><img src="circle.jpg" alt="circle"></div>
+        <div><img src="circle.jpg" alt="circle"></div>
+      </div>
+    </div>
+  </body>
+</html>
