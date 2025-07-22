@@ -11,7 +11,7 @@ body{
 }
 
 .logo{
-    background-image: url("../images/salad2.jpg");
+    background-image: url("../images/salad-resized-2.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover ;
@@ -128,6 +128,7 @@ a:hover {
  text-decoration: underline;
   font-weight: bolder;
   
+  transition: 1s;
 }
 
 .logo-text h1{
