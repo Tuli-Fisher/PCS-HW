@@ -1,0 +1,67 @@
+
+/* html{
+    background-color: black;
+} */
+
+body{
+    display: grid;
+
+    grid-template-columns: 1fr 2fr 8fr 1fr;
+    grid-template-rows: repeat(5,1fr) 50px;
+    grid-template-areas: 
+    'nav nav nav nav'
+    '. colored-side home .'
+    '. colored-side edu .'
+    '. colored-side p-edu .'
+    'footer footer footer footer';
+}
+
+.top{
+    grid-area: nav;
+}
+
+.mid-grid{
+    padding:1em;
+}
+
+#home{
+    grid-area: home;
+}
+
+#edu{
+    grid-area: edu;
+}
+
+#progrming-edu{
+    grid-area: p-edu;
+}
+
+.sidebar{
+    grid-area: colored-side;
+
+    background-color: maroon;
+    color: white;
+}
+
+.sidebar li{
+    padding-bottom: 1em;
+}
+
+.sidebar li:first-child{
+    padding-top: 1em;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    
+    margin: auto;
+}
+
+.sidebar a:hover{
+    text-decoration:underline;
+}
+
+ul{
+    list-style-type: none;
+}
