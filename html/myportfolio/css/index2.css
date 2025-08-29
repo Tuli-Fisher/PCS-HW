@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Monoton&display=swap');
+
+body {
+    background-color: black;
+}
+
+.landing-h1, .landing-middle, .landing-right {
+    color: blue;
+    font-family: Monoton, sans-serif;
+    display: inline-block;
+}
+
+.landing-h1 {
+    transform: translateX(-25vw);
+    transition: transform 2s;
+}
+
+.landing-p {
+    color: white;
+    font-family: Monoton, sans-serif;
+    max-width: 30vw;
+    transform: translateX(100vw);
+    transition: transform 2s;
+}
+
+.landing-middle {
+    transform: translate(20vw, 2vh);
+}
+
+.landing-right {
+    transform: translate(30vw, -20vh);
+    transition: transform 2s;
+}
+
+.landing-h1.slidein {
+    transform: translate(15vw, 2vh);
+}
+
+.landing-p.slidein {
+    transform: translateX(30vw);
+}
+
+.landing-right.slidein {
+    transform: translate(25vw, 2vh);
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+
+    body{
+        overflow: hidden;
+    }
+    .landing-h1 {
+        transform: translateX(-15vw);
+    }
+
+    .landing-p {
+        max-width: 80vw;
+        transform: translateX(120vw);
+    }
+
+    .landing-middle {
+        transform: translate(10vw, 1vh);
+    }
+
+    .landing-right {
+        transform: translate(15vw, -10vh);
+    }
+
+    .landing-h1.slidein {
+        transform: translate(8vw, 1vh);
+    }
+
+    .landing-p.slidein {
+        transform: translateX(14vw);
+    }
+
+    .landing-right.slidein {
+        transform: translate(12vw, 1vh);
+    }
+}

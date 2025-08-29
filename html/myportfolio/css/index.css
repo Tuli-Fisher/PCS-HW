@@ -1,0 +1,49 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Monoton&display=swap');
+
+body{
+    background-color: black;
+}
+
+.landing-h1,.landing-middle,.landing-right{
+    color: blue;
+    font-family: /*'Bebas Neue',*/ Monoton, sans-serif;
+
+    display: inline-block;
+}
+
+.landing-h1{
+    transform: translatex(-250px);
+
+    transition:transform 2s;
+}
+
+.landing-p{
+    color: white;
+    font-family: /*'Bebas Neue',*/ Monoton, sans-serif;
+
+    max-width: 250px;
+
+    transform: translatex(1500px);
+    transition:transform 2s;
+}
+
+.landing-middle{
+    transform: translate(250px,15px);
+}
+
+.landing-right{
+    transform: translate(350px,-200px);
+    transition:transform 2s;
+}
+
+.landing-h1.slidein{
+    transform: translate(200px,15px);
+}
+
+.landing-p.slidein{
+    transform: translatex(350px);
+}
+.landing-right.slidein{
+    transform: translate(300px,15px);
+}
