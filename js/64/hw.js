@@ -1,6 +1,6 @@
 'use strict';
 
-const daysModule = function() {
+const daysModule =(function() {
 
     const days = ['Sunday','Monday','Tuesday'];
 
@@ -14,7 +14,7 @@ const daysModule = function() {
             return days.findIndex((d) => d === day ) + 1;
         }
     };
-}();
+}());
 
 
 
