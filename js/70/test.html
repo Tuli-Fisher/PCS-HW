@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="map.js"></script> 
+     <script src="counter.js"></script>
+     <script src="counterMaker.js"></script>
+    <script>
+
+        const test = [2,5,3,86,5,33];
+        const test2 = ['hi','there','how','you']; 
+
+        console.log(ourMap(test , e => e * 2),test);
+        console.log(ourMap(test , e => e / 2),test);
+
+        console.log(ourMap(test2, e => e.toUpperCase()),test2);
+
+
+        function count(ammt,func){
+            for(let i = 0; i < ammt; i++){
+               func();
+            };
+        }
+        
+        count(10, app.counter.increment);
+
+        const counter1 = app.getCounter();
+        count(5,counter1.increment);
+        
+        const counter2 = app.getCounter();
+        count(15,counter2.increment);
+    
+        app.counter.print();
+        counter1.print();
+        counter2.print();
+        app.ammtCreated();
+    </script>
+</body>
+</html>
