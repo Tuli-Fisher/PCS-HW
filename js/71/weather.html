@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            margin: auto;
+            text-transform: capitalize;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: auto;
+        }
+
+        td,th {
+            border: 1px solid black;
+            padding: 0.5em;
+         }
+    </style>
+</head>
+<body>
+    
+    <h1> weather for new york city </h1>
+
+     <table id="weatherTable">
+      <thead>
+        <tr>
+          <th>Current Temperture</th>
+          <th>Todays High</th>
+          <th>Todays Low</th>
+          <th>Humidity</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="5">loading</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="weather.js"> </script>
+</body>
+</html>
