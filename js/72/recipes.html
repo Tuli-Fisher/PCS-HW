@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>kosherpcs.com</title>
+  </head>
+  <style>
+
+    .showRecipe {
+      display: none;
+    }
+    
+
+    header h1 {
+      text-align: center;
+      color: rgb(31, 136, 172);
+    }
+    #recipeslist {
+      margin: auto;
+      display: block;
+    }
+  </style>
+  <body>
+    <header>
+      <h1>kosherPcs.com the place to find every kosher recipe</h1>
+      <hr />
+    </header>
+
+    <select id="recipeslist">
+        <option hidden>choose a recipe</option>
+    </select>
+
+    <div class="showRecipe reicpeLayout">
+        <img id="pic" >
+        <h2 id="recipeName"></h2>
+        <h3 id="ingredients"></h3>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="load.js"></script>
+  </body>
+</html>
