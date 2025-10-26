@@ -1,0 +1,50 @@
+[
+    {
+        "name": "JavaScript Basics",
+        "id": 1,
+        "pic": "js_basics.png",
+        "url": "https://www.youtube.com/watch?v=EerdGm-ehJQ"
+    },
+    {
+        "name": "HTML & CSS Crash Course",
+        "id": 2,
+        "pic": "html_css.png",
+        "url": "https://www.youtube.com/watch?v=MBlkKE0GYGg"
+    },
+    {
+        "name": "Python for Beginners",
+        "id": 3,
+        "pic": "python_beginners.png",
+        "url": "https://www.youtube.com/watch?v=kqtD5dpn9C8"
+    },
+    {
+        "name": "C# Fundamentals",
+        "id": 4,
+        "pic": "csharp.png",
+        "url": "https://www.youtube.com/watch?v=GhQdlIFylQ8"
+    },
+    {
+        "name": "React.js Tutorial",
+        "id": 5,
+        "pic": "react.png",
+        "url": "https://www.youtube.com/watch?v=SqcY0GlETPk"
+    },
+    {
+        "name": "SQL Basics",
+        "id": 6,
+        "pic": "sql.png",
+        "url": "https://www.youtube.com/watch?v=h0nxCDiD-zg"
+    },
+    {
+        "name": "Data Structures in Java",
+        "id": 7,
+        "pic": "java.png",
+        "url": "https://www.youtube.com/watch?v=8MmMm2-kJV8"
+    },
+    {
+        "name": "Node.js Crash Course",
+        "id": 8,
+        "pic": "nodejs.png",
+        "url": "https://www.youtube.com/watch?v=32M1al-Y6Ag"
+    }
+]

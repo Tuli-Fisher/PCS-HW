@@ -1,0 +1,30 @@
+[
+    {
+        "name":"EL-Hanar",
+        "id":1,
+        "pic":"shira.png",
+        "url":"videos/El Hanaar Hazeh.mp4"
+    },
+
+    {
+        "name":"kolzman",
+        "id":2,
+        "pic":"shira.png",
+        "url":"videos/kolzman.mp4"
+    },
+
+    {
+        "name":"ivri",
+        "id":3,
+        "pic":"shira.png",
+        "url":"videos/ivri.mp4"
+    },
+
+    {
+        "name":"yesh tikvah",
+        "id":4,
+        "pic":"shira.png",
+        "url":"videos/yesh tikvah.mp4"
+    }
+
+]
