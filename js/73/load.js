@@ -6,33 +6,53 @@
     // const tileElem = document.querySelector(".video-tile");
     const videoElem = document.querySelector(".video");
 
-    try {
-        const r = await fetch("coding.json");
+    async function loadvideos(url){
+        try {
+            const musicResults = await fetch(url);
 
-        if(!r.ok){
-            throw new Error(`${r.status} - ${r.statusText}`);
+            if(!musicResults.ok){
+                throw new Error(`${musicResults.status} - ${musicResults.statusText}`);
+            }
+
+            return musicResults.json();
+
+        }catch(e){
+            console.error(e);   
         }
-        const videoNames = await r.json();
-
-        videoNames.forEach(v  => {
-            dropdownElem.innerHTML += `<li><a class="dropdown-item" data-url="${v.url}" >${v.name}</a></li>`;
-
-            sidebarElem.innerHTML += `<div class="video-tile" data-url="${v.url}">
-                                             <h4>${v.name}</h4>
-                                         <img src="${v.pic}" alt="">
-                                    </div>`;
-        });
-
-        sidebarElem.addEventListener("click", async (e) => {
-            const data = e.target.closest(".video-tile");
-            console.log(data.dataset.url);
-            videoElem.src= data.dataset.url; 
-            // videoElem.play();
-        });
-
-    }catch(e){
-        console.error(e);   
     }
 
+
+    async function createTiles(videoNames){
+
+        videoNames.forEach(video  => {
+
+            const videoLi = document.createElement("li");
+            videoLi.innerHTML = ` ${video.name}`;
+            videoLi.className = "dropdown-item";
+              
+            const videoTile = document.createElement("div");
+            videoTile.innerHTML = ` <h4>${video.name}</h4>
+                                     <img src="${video.pic}" > `;
+
+            videoTile.className = "video-tile";
+
+            dropdownElem.appendChild(videoLi); 
+            sidebarElem.appendChild(videoTile);
+
+            videoLi.addEventListener("click", () => {
+                videoElem.src = video.url;
+            });
+
+            videoTile.addEventListener("click", () => {
+                videoElem.src = video.url;
+            });
+
+        });
+    }
+
+
+    const videoNames = await loadvideos("videos.json");
+
+    createTiles(videoNames);
 
 }());
