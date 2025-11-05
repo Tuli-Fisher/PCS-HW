@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
+
+        header {
+            margin: auto;
+            text-align: center;
+            color: rgb(38, 63, 129);
+        }
+
+      #potato {
+        position: absolute;
+        top: 45%;
+        left: 45%;
+      }
+
+      .part {
+        /* top: 45%;
+            left: 45%; */
+        display: none;
+        cursor: pointer;
+      }
+
+      .displayButton {
+        position: relative;
+        display: inline-block;
+        margin: auto;
+        padding: 10px;
+        background-color: rgb(80, 228, 159);
+        border: 1px solid rgb(38, 63, 129);
+        cursor: pointer;
+      }
+
+      .active {
+        background-color: rgb(38, 63, 129);
+        color: white;
+      }
+      .displayButton:hover {
+        background-color: rgb(76, 106, 189);
+        color: white;
+      }
+
+      .buttons-display{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .imgDiv{
+        display: none;
+        position: absolute;
+        top: 20%;
+        left: 10%;
+        gap: 10px;
+
+        width: 200px;
+        height: 200px;
+
+        border: 1px solid black;
+      }
+
+      .imgDiv img{
+        width: 80px;
+        height: 80px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Mr Potato Head!</h1>
+    </header>
+
+    <div class="buttons-display">
+      <div class="displayButton" data-type="eyes1">Eyes 1</div>
+      <div class="displayButton" data-type="eyes2">Eyes 2</div>
+      <div class="displayButton" data-type="eyes3">Eyes 3</div>
+      <div class="displayButton" data-type="eyes4">Eyes 4</div>
+      <div class="displayButton" data-type="glasses">glasses</div>
+      <div class="displayButton" data-type="leftEar">Left Ear</div>
+      <div class="displayButton" data-type="rightEar">Rigth Ear</div>
+      <div class="displayButton" data-type="mouth1">Mouth 1</div>
+      <div class="displayButton" data-type="mouth2">Mouth 2</div>
+      <div class="displayButton" data-type="nose1">Nose 1</div>
+      <div class="displayButton" data-type="nose2">Nose 2</div>
+
+      <div class="displayButton otherButton"> Choose Background Image</div>
+      <div class="displayButton otherButton">Save</div>
+    </div>
+
+    <audio src="media/El_Hanaar_Hazeh.mp4" controls ></audio>
+    <section>
+      <img id="potato" src="parts/body.png" alt="" />
+
+      <img class="part" id="eyes1" src="parts/eyes1.png" alt="" />
+      <img class="part" id="eyes2" src="parts/eyes2.png" alt="" />
+      <img class="part" id="eyes3" src="parts/eyes3.png" alt="" />
+      <img class="part" id="eyes4" src="parts/eyes4.png" alt="" />
+      <img class="part" id="glasses" src="parts/glasses.png" alt="" />
+      <img class="part" id="leftEar" src="parts/leftEar.png" alt="" />
+      <img class="part" id="mouth2" src="parts/mouth2.png" alt="" />
+      <img class="part" id="rightEar" src="parts/rightEar.png" alt="" />
+      <img class="part" id="mouth1" src="parts/mouth1.png" alt="" />
+      <img class="part" id="nose1" src="parts/nose1.png" alt="" />
+      <img class="part" id="nose2" src="parts/nose2.png" alt="" />
+    </section>
+    </div>
+
+    <div class="imgDiv">
+        <img src="media/images1.jpg" alt="" class="backImg">
+        <img src="media/images2.jpg" alt="" class="backImg">
+        <img src="media/images3.jpg" alt="" class="backImg">
+        <img src="media/images.jpg" alt="" class="backImg">
+    </div>
+
+    <script src="mr.potato.js"></script>
+  </body>
+</html>
