@@ -62,7 +62,16 @@
             left: 40%;
             background-color: white;
             border: 2px solid black;
-            padding: 10px;
+            padding: 30px;
+        }
+
+        .messagebox img{
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
         }
 
         .default{
@@ -105,15 +114,11 @@
         </div>
     </main>
 
-    <div class="messagebox save default">
-        input name: <input type="text" class="nameInput">
-        <button class="saveButton">OK</button>
+    <div class="messagebox default">
+        <img src="media/x.png" alt="">
+        <div class="content"></div>
     </div>
 
-    <div class="messagebox  load default">
-        <select id="loadSelect"></select>
-        <button class="loadButton">OK</button>
-    </div>
 
     <script src="new.js"></script>
 </body>

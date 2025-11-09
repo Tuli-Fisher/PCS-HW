@@ -16,8 +16,6 @@
                 newPart.style.left = `${e.pageX - e.offsetX}px`;
                 newPart.style.top = `${e.pageY - e.offsetY}px`;
 
-                document.body.append(newPart);
-
                 draggedPart = newPart;
                 offset = { x: e.offsetX, y: e.offsetY};
             }
@@ -48,6 +46,8 @@
         newPart.className = part.className;
         newPart.style.position = 'absolute';
 
+        document.body.append(newPart);
+
         parts.push(newPart);
 
         return newPart;
@@ -56,36 +56,53 @@
 
     const messageBox = document.querySelector('.messagebox');
     const nameInput = document.querySelector('.nameInput');
-    const saveButton = document.querySelector('.saveButton');
+    //const saveButton = document.querySelector('.saveButton');
     const loadSelect = document.querySelector('#loadSelect');
     const loadBox = document.querySelector('.load');
     const loadOk = document.querySelector('.loadButton');
+
+    const contentBox = document.querySelector('.content');
     let userName;
     let loadName;
 
     document.querySelector('.saveSpan').addEventListener('click', () =>{
         messageBox.style.display = 'block';
+        contentBox.innerHTML = `
+         input name: <input type="text" class="nameInput">
+         <button class="saveButton">OK</button>`;
         messageBox.style.zIndex = zIndex++;
     });
 
-    saveButton.addEventListener('click', () =>{
-        messageBox.style.display = 'none';
-        userName = nameInput.value;
-        saveState(userName);
+    document.body.addEventListener('click', e =>{
+        if(e.target.classList.contains('saveButton')){
+            messageBox.style.display = 'none';
+            userName = nameInput.value;
+            saveState(userName);
+        }
     });
 
     document.querySelector('.loadSpan').addEventListener('click', e =>{
 
-        loadSelect.innerHTML = '';
+        if(localStorage.length === 0){
+            contentBox.innerHTML = ' <H1> No saved data found </H1>';
+            messageBox.style.display = 'block';
+            messageBox.style.zIndex = zIndex++;
+            return;
+        }
+        
+        const loadSelect = document.createElement('select');
+        contentBox.append(loadSelect);
+
         for(let i=0; i<localStorage.length; i++){
+            
             const key = localStorage.key(i);
             const option = document.createElement('option');
             option.value = key;
             option.textContent = key;
             loadSelect.append(option);
         }
-        loadBox.style.display = 'block';
-        loadBox.style.zIndex = zIndex++;
+        messageBox.style.display = 'block';
+        messageBox.style.zIndex = zIndex++;
     });
 
     loadOk.addEventListener('click', () =>{
@@ -125,4 +142,15 @@
         }
     }
 
+    document.body.addEventListener("click", (e) => {
+        if(e.target.tagName === "IMG" && e.target.parentElement.classList.contains("messagebox"))
+        e.target.parentElement.style.display = "none";
+    });
+    
+
+    document.querySelector('.deleteButton').addEventListener('click', () =>{
+        const loadName = loadSelect.value;
+        localStorage.removeItem(loadName);
+        loadBox.style.display = 'none';
+    });
 }());
