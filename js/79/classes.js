@@ -1,20 +1,20 @@
 'use strict';
 
 class Element{
-    innerText = '';
+    #innerText = '';
 
     children = [];
 
     constructor(text){
-        this.innerText = text;
+        this.#innerText = text;
     }
 
     setInnerText(text){
-        this.innerText = text;
+        this.#innerText = text;
     }
 
     getInnerText(){
-        return this.innerText;
+        return this.#innerText;
     }
 
     addChild(elem){
@@ -31,7 +31,7 @@ class Element{
     }
 
     render(){
-        console.log(this.innerText);
+        console.log(this.#innerText);
         this.children.forEach(c => c.render());
     }
 };
