@@ -12,13 +12,17 @@
             this.x = this.radius + 1;
             this.y = this.radius + 1;
 
+            this.dx = 1;
+            this.dy = 2.5;
+            this.gravity = 0;
+
             Ball.balls.push(this);
         };
 
         static balls = [];
-        static dx = 1;
-        static dy = 2.5;
-        static gravity = 0;
+        // static dx = 1;
+        // static dy = 2.5;
+        //static gravity = 0;
 
        
     }
@@ -42,20 +46,20 @@
                 context.beginPath();
                 context.fillStyle = b.color;
 
-                b.x += Ball.dx;
-                b.y += Ball.dy;
+                b.x += b.dx;
+                b.y += b.dy;
 
                 if(b.x < b.radius || b.x >= (canvas.width - b.radius)){
-                    Ball.dx = -Ball.dx;
+                    b.dx = -b.dx;
                 }
 
                 if(b.y < (b.radius - Ball.gravity) ){
-                    Ball.dy = -Ball.dy;
+                    b.dy = -b.dy;
                 }
 
                 if(b.y >= (canvas.height  + b.radius)){
-                    Ball.dy = -Ball.dy;
-                    Ball.gravity += 5;
+                    b.dy = -b.dy;
+                    b.gravity += 5;
                 }
 
                 context.arc(b.x, b.y, b.radius, 0, 2 * Math.PI);
