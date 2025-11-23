@@ -52,20 +52,38 @@
   function snakeMove(){
     context.clearRect(0, 0, theCanvas.width, theCanvas.height);
     const middle = segaments.slice(1,-1);
-    segaments[segaments.length - 1] = segaments[0];
+    // segaments[segaments.length - 1].x = segaments[0].x;
+    // segaments[segaments.length - 1].y = segaments[0].y;
+
+    for (let i = segaments.length - 1; i > 0; i--) {
+      segaments[i].x = segaments[i - 1].x;
+      segaments[i].y = segaments[i - 1].y;
+    }
 
     switch(direction) {
       case 'ArrowRight':
           segaments[0].x += SNAKE_SIZE;
+          // middle?.forEach(e=>{
+          //   e.x += SNAKE_SIZE;
+          // });
           break;
       case 'ArrowLeft':
           segaments[0].x -= SNAKE_SIZE;
+          // middle?.forEach(e=>{
+          //   e.x -= SNAKE_SIZE;
+          // });
           break;
       case 'ArrowUp':
           segaments[0].y -= SNAKE_SIZE;
+          // middle?.forEach(e=>{
+          //   e.y -= SNAKE_SIZE;
+          // });
           break;
       case 'ArrowDown':
           segaments[0].y += SNAKE_SIZE;
+          // middle?.forEach(e=>{
+          //   e.y += SNAKE_SIZE;
+          // });
           break;
     }
 
@@ -130,16 +148,16 @@
     switch(direction) {
 
       case 'ArrowRight':
-          newSeg.x -= SNAKE_SIZE;
+          newSeg.x -= SNAKE_SIZE ;
           break;
       case 'ArrowLeft':
-          newSeg.x += SNAKE_SIZE;
+          newSeg.x +=  SNAKE_SIZE ;
           break;
       case 'ArrowUp':
-          newSeg.y += SNAKE_SIZE;
+          newSeg.y += SNAKE_SIZE ;
           break;
       case 'ArrowDown':
-          newSeg.y += SNAKE_SIZE;
+          newSeg.y += SNAKE_SIZE ;
           break;
     }
 
