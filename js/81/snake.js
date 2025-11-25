@@ -1,12 +1,13 @@
 (function () {
   'use strict';
-
+  
   const SNAKE_SIZE = 64;
   let score = 0;
   let speed = 500;
   const segaments = [{x:0,y:0}];
   
   let direction = 'ArrowRight';
+  let pause = false;
 
   //const snake = { x: 0, y:0, };
   const apple = {x:0,y:0};
@@ -14,9 +15,12 @@
   const snakeHead = document.createElement('img');
   snakeHead.src = 'snakeHead.png';
   const appleImg = document.createElement('img');
-  appleImg.src = 'apple.jpg';
+  appleImg.src = 'apple.png';
   const tail = document.createElement('img');
   tail.src = 'tail.png';
+
+  let crunchSound = document.querySelector('#crunch');
+  let crashSound = document.querySelector('#crash');
 
   const theCanvas = document.querySelector('#theCanvas');
   const context = theCanvas.getContext('2d');
@@ -87,18 +91,24 @@
           break;
     }
 
-    if(segaments[0].x > theCanvas.width || segaments[0].x < 0 || segaments[0].y > theCanvas.height || segaments[0].y < 0 ){
+    if(segaments[0].x > (theCanvas.width - SNAKE_SIZE) || segaments[0].x < (0 - SNAKE_SIZE) || segaments[0].y >= theCanvas.height || segaments[0].y < 0 ){
 
-      context.clearRect(0, 0, theCanvas.width, theCanvas.height);
-      context.font = '60px Arial';
-      context.fillText(` GAME OVER! YOUR SCORE IS:${score}`, 250, 250);
-
+      //context.clearRect(0, 0, theCanvas.width, theCanvas.height);
+      pause = true;
+      crashSound.play();
+      // context.font = '60px Arial';
+      // context.fillText(` GAME OVER! YOUR SCORE IS:${score}`, 250, 250);
+      let goBox = document.querySelector('#gameover');
+      goBox.innerHTML = ` GAME OVER!! YOUR FINAL SCORE IS: ${score}`;
+      goBox.classList.add('show');
+      
     }else{
 
       ateApple();
       
       context.font = '30px Arial';
-      context.fillText(`Score: ${score}`, 250, 250);
+      document.querySelector('#scoreBox').innerHTML = `Score:${score}`;
+      //context.fillText(`Score: ${score}`, 250, 250);
 
       context.drawImage(snakeHead, segaments[0].x, segaments[0].y);
 
@@ -114,7 +124,10 @@
   
       context.drawImage(appleImg, apple.x, apple.y);
 
-      setTimeout(snakeMove,speed);
+      if(!pause){
+        setTimeout(snakeMove,speed);
+      };
+
     };
   }
 
@@ -137,6 +150,9 @@
       speed -= 25;
       placeApple();
       addSegament();
+
+      crunchSound.currentTime = 0;
+      crunchSound.play();
     }
 
   };
