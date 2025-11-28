@@ -11,7 +11,7 @@
         if (isActive) {
           map.style.display = "block";
           tiles.classList.add('hidden');
-          mapMaker(filteredData);
+          //mapMaker(filteredData);
         } else {
           map.style.display = "none";
           tiles.classList.remove('hidden');

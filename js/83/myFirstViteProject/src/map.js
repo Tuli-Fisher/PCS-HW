@@ -1,5 +1,4 @@
-
-import google from './mapsApi.js';
+/* global google */
 
 export async function mapMaker(mapArray){
 
@@ -19,7 +18,7 @@ export async function mapMaker(mapArray){
         });
     };
 
-    await initMap();
+    //await initMap();
 
     const bounds = new google.maps.LatLngBounds();
     const { AdvancedMarkerElement } = await google.maps.importLibrary('marker');
