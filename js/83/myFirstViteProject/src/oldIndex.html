@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>KAPY TRIPS</title>
+    <style>
+      :root {
+        --accent: #1ba6a3;
+        --bg: #f7f7f6;
+        --card: #fff;
+        --text: #222;
+        --muted: #666;
+        font-family: "Segoe UI", Roboto, system-ui, -apple-system,
+          "Helvetica Neue", Arial;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        display: grid;
+        grid-template-columns: 250px 1fr 250px; /* filters | content | ads */
+        min-height: 100vh;
+        gap: 20px;
+      }
+
+      header {
+        grid-column: 1 / 4;
+        background: var(--accent);
+        color: #fff;
+        text-align: center;
+        padding: 32px 10px;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 32px;
+        text-transform: uppercase;
+      }
+      header p {
+        margin: 6px 0 0;
+        font-size: 15px;
+        opacity: 0.9;
+      }
+
+      /* Filter sidebar */
+      aside.filters {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        padding: 16px;
+        margin-left: 20px;
+        align-self: start;
+        position: sticky;
+        top: 20px;
+        height: fit-content;
+      }
+
+      aside.filters h3 {
+        margin-top: 0;
+        font-size: 18px;
+        color: var(--accent);
+      }
+
+      .filters-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .filters-grid input,
+      .filters-grid select {
+        padding: 8px 10px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        font-size: 14px;
+      }
+
+      .reset-btn {
+        background: #eee;
+        border: none;
+        border-radius: 999px;
+        padding: 8px 16px;
+        cursor: pointer;
+        font-size: 14px;
+        margin-top: 8px;
+      }
+      .reset-btn:hover {
+        background: #ddd;
+      }
+
+      /* Tiles container */
+      main {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .tile {
+        display: flex;
+        background: var(--card);
+        border-radius: 16px;
+        border: 1px solid #eee;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        margin-bottom: 20px;
+        transition: transform 0.2s, box-shadow 0.2s;
+        width: 80%; /* don’t stretch all the way */
+        max-width: 850px;
+      }
+      .tile:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+      }
+
+      .tile img {
+        width: 260px;
+        height: 180px;
+        object-fit: cover;
+        background: #ddd;
+      }
+
+      .tile-content {
+        flex: 1;
+        padding: 14px 18px;
+      }
+
+      .tile-content h3 {
+        margin: 0 0 4px;
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--accent);
+      }
+
+      .tile-content .meta {
+        font-size: 13px;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+
+      .tile-content .info {
+        font-size: 14px;
+        color: var(--text);
+        line-height: 1.45;
+      }
+
+      .tags {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .tag {
+        background: var(--accent);
+        color: #fff;
+        border-radius: 999px;
+        padding: 5px 10px;
+        font-size: 12px;
+      }
+
+      .no-results {
+        text-align: center;
+        color: var(--muted);
+        padding: 40px;
+        background: #fff;
+        border-radius: 12px;
+        border: 1px solid #eee;
+      }
+
+      #map{
+        width: 100%;
+        height: 100%;
+      }
+
+      .map-veiw {
+        display: none;
+      }
+      /* Right ad column */
+      aside.ads {
+        position: fixed;
+        right: 20px;
+        top: 120px;
+        width: 230px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .ads img {
+        width: 100%;
+        border-radius: 12px;
+        object-fit: cover;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      }
+
+      footer {
+        grid-column: 1 / 4;
+        text-align: center;
+        color: var(--muted);
+        font-size: 13px;
+        padding: 30px 0;
+      }
+
+      .acive-select{
+        display: none;
+      }
+
+      /*-------------*/
+
+      .switch-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+      }
+
+      .switch-label {
+        font-weight: 500;
+        color: #555;
+      }
+
+      .switch {
+        position: relative;
+        width: 70px;
+        height: 34px;
+        background-color: #ddd;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .slider {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 28px;
+        height: 28px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+      }
+
+      .switch.active {
+        background-color: #4fa28a;
+      }
+
+      .switch.active .slider {
+        transform: translateX(36px);
+      }
+
+      #tiles,
+      #map {
+        margin-top: 1.5rem;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+      }
+
+      #map {
+        display: none;
+      }
+
+      .hidden{
+        display: none;
+      }
+
+      /*-----------------*/
+      @media (max-width: 900px) {
+        body {
+          grid-template-columns: 1fr;
+        }
+        aside.ads {
+          position: static;
+          width: 100%;
+          flex-direction: row;
+          justify-content: space-around;
+        }
+        aside.filters {
+          position: static;
+          margin: 10px 20px;
+        }
+        .tile {
+          flex-direction: column;
+          width: 95%;
+        }
+        .tile img {
+          width: 100%;
+          height: 200px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>KAPY TRIPS</h1>
+      <p>An Adventure In The Making</p>
+    </header>
+
+    <aside class="filters">
+      <h3>Filters</h3>
+      <div class="filters-grid">
+        <!-- <select id="list-map">
+          <option value="">List Veiw</option>
+          <option value="">Map Veiw</option>
+        </select> -->
+
+        <div class="switch-container">
+          <span class="switch-label">List</span>
+          <div class="switch" id="viewSwitch">
+            <div class="slider"></div>
+          </div>
+          <span class="switch-label">Map</span>
+        </div>
+
+        <select id="sortOrder">
+          <option value="distance">Sort By Distance </option>
+          <option value="name">Sort By Name</option>
+        </select>
+
+        <input id="searchInput" type="text" placeholder="Search parks..." />
+        <select id="typeFilter">
+          <option value="">All types</option>
+        </select>
+        <select id="attrTypeFilter">
+          <option value="">All types</option>
+        </select>
+        <!-- <select id="amenityFilter">
+          <option value="">Any amenity</option>
+        </select> -->
+        <button id="reset" class="reset-btn">Reset</button>
+      </div>
+    </aside>
+
+    <main>
+      <div id="tiles"></div>
+      <div id="noresults" class="no-results" style="display: none">
+        No parks found.
+      </div>
+      <div id="map" class="map-view"></div>
+    </main>
+
+    <aside class="ads">
+      <img
+        src="images/ChatGPT Image Oct 20, 2025, 01_51_31 PM.png"
+        alt="Ad 1"
+      />
+      <img src="images/withSign.png" alt="Ad 2" />
+      <img
+        src="images/ChatGPT Image Sep 29, 2025, 08_17_43 PM.png"
+        alt="Ad 3"
+      />
+    </aside>
+
+    <footer>© Kapy Trips — An Adventure In The Making</footer>
+
+    <script>
+      const switchElem = document.getElementById("viewSwitch");
+      const tiles = document.getElementById("tiles");
+      const map = document.getElementById("map");
+
+      switchElem.addEventListener("click", () => {
+        const isActive = switchElem.classList.toggle("active");
+
+        if (isActive) {
+          map.style.display = "block";
+          tiles.classList.add('hidden');
+          mapMaker(filteredData);
+        } else {
+          map.style.display = "none";
+          tiles.classList.remove('hidden');
+        }
+      });
+    </script>
+    <script>
+      ((g) => {
+        var h,
+          a,
+          k,
+          p = "The Google Maps JavaScript API",
+          c = "google",
+          l = "importLibrary",
+          q = "__ib__",
+          m = document,
+          b = window;
+        b = b[c] || (b[c] = {});
+        var d = b.maps || (b.maps = {}),
+          r = new Set(),
+          e = new URLSearchParams(),
+          u = () =>
+            h ||
+            (h = new Promise(async (f, n) => {
+              await (a = m.createElement("script"));
+              e.set("libraries", [...r] + "");
+              for (k in g)
+                e.set(
+                  k.replace(/[A-Z]/g, (t) => "_" + t[0].toLowerCase()),
+                  g[k]
+                );
+              e.set("callback", c + ".maps." + q);
+              a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+              d[q] = f;
+              a.onerror = () => (h = n(Error(p + " could not load.")));
+              a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+              m.head.append(a);
+            }));
+        d[l]
+          ? console.warn(p + " only loads once. Ignoring:", g)
+          : (d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)));
+      })({
+        key: "AIzaSyAgQ-DYpv3KR4551QT6R8hb-_4fjklks0Q",
+        v: "weekly",
+        // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
+        // Add other bootstrap parameters as needed, using camel case.
+      });
+    </script>
+    <script src="js/map9.js" async></script>
+    <script src="logic.js" async></script>
+  </body>
+</html>
