@@ -1,6 +1,7 @@
 
 import './style.css';
 import './usingMap.js';
+import dayjs from 'dayjs';
 
 const parkUrl ="https://opensheet.elk.sh/1lc-Lw7vvm3NXp4IvqvpU3i3s4h25MIG6M2dPm3t3T6U/Sheet1";    
 const attractionUrl ="https://opensheet.elk.sh/1lR_-c5QGmLBjVOOOCHvOcEuTVGIWg6u3uubtcCaeOk4/Sheet1";
@@ -179,3 +180,5 @@ document.getElementById("reset").addEventListener("click", () => {
 });
 
 loadData();
+
+document.getElementById("time").textContent = dayjs().format('MMMM D, YYYY h:mm A');
