@@ -1,11 +1,11 @@
+import "./style.css";
+import "./usingMap.js";
+import dayjs from "dayjs";
 
-import './style.css';
-import './usingMap.js';
-import dayjs from 'dayjs';
-
-const parkUrl ="https://opensheet.elk.sh/1lc-Lw7vvm3NXp4IvqvpU3i3s4h25MIG6M2dPm3t3T6U/Sheet1";    
-const attractionUrl ="https://opensheet.elk.sh/1lR_-c5QGmLBjVOOOCHvOcEuTVGIWg6u3uubtcCaeOk4/Sheet1";
-
+const parkUrl =
+  "https://opensheet.elk.sh/1lc-Lw7vvm3NXp4IvqvpU3i3s4h25MIG6M2dPm3t3T6U/Sheet1";
+const attractionUrl =
+  "https://opensheet.elk.sh/1lR_-c5QGmLBjVOOOCHvOcEuTVGIWg6u3uubtcCaeOk4/Sheet1";
 
 let allData = [];
 let filteredData;
@@ -13,172 +13,183 @@ let filteredData;
 export default filteredData;
 
 async function loadData() {
-    try {
-        const [parks, attractions] = await Promise.all([
-            fetch(parkUrl).then((r) => r.json()),
-            fetch(attractionUrl).then((r) => r.json()),
-        ]);
-        allData = [...parks, ...attractions].filter(p => p.name.trim() !== '');
-        allData.sort((a, b) => a.driveTime - b.driveTime);
-        buildFilters(allData);
-        render(allData);
-    } catch (err) {
-        console.error(err);
-        document.getElementById("tiles").innerHTML =
-            '<div class="no-results">Error loading data.</div>';
-    }
+  try {
+    const [parks, attractions] = await Promise.all([
+      fetch(parkUrl).then((r) => r.json()),
+      fetch(attractionUrl).then((r) => r.json()),
+    ]);
+    allData = [...parks, ...attractions].filter((p) => p.name.trim() !== "");
+    allData.sort((a, b) => a.driveTime - b.driveTime);
+    buildFilters(allData);
+    render(allData);
+  } catch (err) {
+    console.error(err);
+    document.getElementById("tiles").innerHTML =
+      '<div class="no-results">Error loading data.</div>';
+  }
 }
 
 function buildFilters(data) {
-    const typeSel = document.getElementById("typeFilter");
-    const types = [...new Set(data.map((d) => d.type).filter(Boolean))];
-    typeSel.innerHTML =
+  const typeSel = document.getElementById("typeFilter");
+  const types = [...new Set(data.map((d) => d.type).filter(Boolean))];
+  typeSel.innerHTML =
     '<option value="">All types</option>' +
-    types.map((t) => `<option value="${t.toLowerCase()}">${t}</option>`).join("");
+    types
+      .map((t) => `<option value="${t.toLowerCase()}">${t}</option>`)
+      .join("");
 
-    const attractionFilter = document.getElementById("attrTypeFilter");
-    const attractionTypes = [...new Set(data.map((d) => d.category).filter(Boolean))];
-    attractionFilter.innerHTML =
+  const attractionFilter = document.getElementById("attrTypeFilter");
+  const attractionTypes = [
+    ...new Set(data.map((d) => d.category).filter(Boolean)),
+  ];
+  attractionFilter.innerHTML =
     '<option value="">All types</option>' +
     attractionTypes.map((t) => `<option>${t.toLowerCase()}</option>`).join("");
 
-    // const amenSel = document.getElementById("amenityFilter");
-    // const amenities = Object.keys(AMEN_EMOJI);
-    // amenSel.innerHTML =
-    // '<option value="">Any amenity</option>' +
-    // amenities.map((a) => `<option>${a}</option>`).join("");
+  // Set up the event listener for typeFilter after it's populated
+  typeSel.addEventListener("input", (e) => {
+    if (e.target.value === "park") {
+      attractionFilter.classList.add("active-select");
+    } else {
+      attractionFilter.classList.remove("active-select");
+    }
+  });
+
+  // const amenSel = document.getElementById("amenityFilter");
+  // const amenities = Object.keys(AMEN_EMOJI);
+  // amenSel.innerHTML =
+  // '<option value="">Any amenity</option>' +
+  // amenities.map((a) => `<option>${a}</option>`).join("");
 }
 
 function tag(label) {
-    const el = document.createElement("div");
-    el.className = "tag";
-    el.textContent = label;
-    return el;
+  const el = document.createElement("div");
+  el.className = "tag";
+  el.textContent = label;
+  return el;
 }
 
-function SortType(array){
-    const sortVal = document.querySelector('#sortOrder').value;
-    if(sortVal === 'distance'){
-        array.sort((a, b) => a.driveTime - b.driveTime);
-    }
-    if(sortVal === 'name'){
-        array.sort((a, b) => a.name.localeCompare(b.name));
-    }
-};
+function SortType(array) {
+  const sortVal = document.querySelector("#sortOrder").value;
+  if (sortVal === "distance") {
+    array.sort((a, b) => a.driveTime - b.driveTime);
+  }
+  if (sortVal === "name") {
+    array.sort((a, b) => a.name.localeCompare(b.name));
+  }
+}
 
 function render(data = allData) {
-    const wrap = document.getElementById("tiles");
-    const nores = document.getElementById("noresults");
-    wrap.innerHTML = "";
+  const wrap = document.getElementById("tiles");
+  const nores = document.getElementById("noresults");
+  wrap.innerHTML = "";
 
-    const searchInput = document.getElementById("searchInput").value.toLowerCase();
-    const type = document.getElementById("typeFilter").value.toLowerCase();
-    const attrType = document.getElementById("attrTypeFilter").value.toLowerCase();
-    //const amen = document.getElementById("amenityFilter").value.toLowerCase();
+  const searchInput = document
+    .getElementById("searchInput")
+    .value.toLowerCase();
+  const type = document.getElementById("typeFilter").value.toLowerCase();
+  const attrType = document
+    .getElementById("attrTypeFilter")
+    .value.toLowerCase();
+  //const amen = document.getElementById("amenityFilter").value.toLowerCase();
 
-    let items = data.filter((d) => {
-        const text = Object.values(d).join(" ").toLowerCase();
-        if (searchInput && !text.includes(searchInput)) return false;
-        if (type && (d.type || "").toLowerCase() !== type) return false;
-        if (attrType && (d.category || "").toLowerCase() !== attrType) return false;
-        //if (amen && !d[amen]) return false;
-        return true;
-    });
+  let items = data.filter((d) => {
+    const text = Object.values(d).join(" ").toLowerCase();
+    if (searchInput && !text.includes(searchInput)) return false;
+    if (type && (d.type || "").toLowerCase() !== type) return false;
+    if (attrType && (d.category || "").toLowerCase() !== attrType) return false;
+    //if (amen && !d[amen]) return false;
+    return true;
+  });
 
-    filteredData = items;
+  filteredData = items;
 
-    SortType(filteredData);
+  SortType(filteredData);
 
-    nores.style.display = items.length ? "none" : "block";
+  nores.style.display = items.length ? "none" : "block";
 
-    items.forEach((item) => {
-        const tile = document.createElement("div");
-        tile.className = "tile";
+  items.forEach((item) => {
+    const tile = document.createElement("div");
+    tile.className = "tile";
 
-        const img = document.createElement("img");
-        img.src = item.image || item.pic || "";
-        img.alt = item.name || "";
-        tile.appendChild(img);
+    const img = document.createElement("img");
+    img.src = item.image || item.pic || "";
+    img.alt = item.name || "";
+    tile.appendChild(img);
 
-        const content = document.createElement("div");
-        content.className = "tile-content";
+    const content = document.createElement("div");
+    content.className = "tile-content";
 
-        const h3 = document.createElement("h3");
-        h3.textContent = item.name || "whoops we seem to be missing something";
-        content.appendChild(h3);
+    const h3 = document.createElement("h3");
+    h3.textContent = item.name || "whoops we seem to be missing something";
+    content.appendChild(h3);
 
-        const formatedTime = formatDriveTime(item.driveTime);
+    const formatedTime = formatDriveTime(item.driveTime);
 
-        const meta = document.createElement("div");
-        meta.className = "meta";
-        meta.textContent = [item.address,formatedTime ]
-            .filter(Boolean)
-            .join(" • ");
-        content.appendChild(meta);
+    const meta = document.createElement("div");
+    meta.className = "meta";
+    meta.textContent = [item.address, formatedTime].filter(Boolean).join(" • ");
+    content.appendChild(meta);
 
-        const info = document.createElement("div");
-        info.className = "info";
-        info.innerHTML = `
+    const info = document.createElement("div");
+    info.className = "info";
+    info.innerHTML = `
             ${item.description ? `<p>${item.description}</p>` : ""}
             ${item.hours ? `<p><strong>Hours:</strong> ${item.hours}</p>` : ""}
-            ${item.phoneNumber ? `<p><strong>Phone:</strong> ${item.phoneNumber}</p>` : ""}
+            ${
+              item.phoneNumber
+                ? `<p><strong>Phone:</strong> ${item.phoneNumber}</p>`
+                : ""
+            }
           `;
-        content.appendChild(info);
+    content.appendChild(info);
 
-        const tags = document.createElement("div");
-        tags.className = "tags";
-        if (item.category) tags.appendChild(tag(item.category));
-        if (item.type) tags.appendChild(tag(item.type));
-        if (item.good) tags.appendChild(tag("Kids"));
-        if(item.restrooms?.includes('y')) tags.appendChild(tag("Restrooms"));
-        content.appendChild(tags);
+    const tags = document.createElement("div");
+    tags.className = "tags";
+    if (item.category) tags.appendChild(tag(item.category));
+    if (item.type) tags.appendChild(tag(item.type));
+    if (item.good) tags.appendChild(tag("Kids"));
+    if (item.restrooms?.includes("y")) tags.appendChild(tag("Restrooms"));
+    content.appendChild(tags);
 
-        tile.appendChild(content);
-        wrap.appendChild(tile);
-    });
+    tile.appendChild(content);
+    wrap.appendChild(tile);
+  });
 }
-
 
 function formatDriveTime(dt) {
-            if (!dt) return "";               // no time → show nothing
+  if (!dt) return ""; // no time → show nothing
 
-            let minutes = parseInt(dt, 10);   // convert to number safely
-            if (isNaN(minutes)) return "";     // invalid input → ignore
+  let minutes = parseInt(dt, 10); // convert to number safely
+  if (isNaN(minutes)) return ""; // invalid input → ignore
 
-            if (minutes < 60) {
-                return `${minutes} min`;
-            }
+  if (minutes < 60) {
+    return `${minutes} min`;
+  }
 
-            const hours = Math.floor(minutes / 60);
-            const rem = minutes % 60;
+  const hours = Math.floor(minutes / 60);
+  const rem = minutes % 60;
 
-            if (rem === 0) {
-                return `${hours} hr`;
-            }
+  if (rem === 0) {
+    return `${hours} hr`;
+  }
 
-            return `${hours} hr ${rem} min`;
+  return `${hours} hr ${rem} min`;
 }
 
-["sortOrder","searchInput", /*"amenityFilter",*/ "attrTypeFilter"].forEach((id) =>
-    document.getElementById(id).addEventListener("input", () => render())
+["sortOrder", "searchInput", /*"amenityFilter",*/ "attrTypeFilter", "typeFilter"].forEach(
+  (id) => document.getElementById(id).addEventListener("input", () => render())
 );
 
-/////needs work
-console.log(document.querySelector('#typeFilter'));
-document.querySelector('#typeFilter').addEventListener('input',e =>{
-    if(e.target.value === 'park'){
-        document.querySelector('#attrTypeFilter').classList.add('active-select');
-    }else{
-        document.querySelector('#attrTypeFilter').classList.remove('active-select');
-    }
-
-});
-
 document.getElementById("reset").addEventListener("click", () => {
-    document.querySelectorAll(".filters-grid input, .filters-grid select").forEach((el) => (el.value = ""));
-    render();
+  document
+    .querySelectorAll(".filters-grid input, .filters-grid select")
+    .forEach((el) => (el.value = ""));
+  render();
 });
 
 loadData();
 
-document.getElementById("time").textContent = dayjs().format('MMMM D, YYYY h:mm A');
+document.getElementById("time").textContent = dayjs().format(
+  "MMMM D, YYYY h:mm A"
+);
