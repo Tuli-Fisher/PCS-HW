@@ -1,0 +1,33 @@
+
+.widget {
+  background: linear-gradient(135deg, #6dd5fa, #2980b9); /* soft blue gradient */
+  color: #ffffff; /* text color */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  max-width: 300px;
+  margin: 20px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.widget:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+}
+
+.widget h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.widget p {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+/* Optional: small weather description in italics */
+.widget p:nth-child(3) {
+  font-style: italic;
+}

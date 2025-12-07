@@ -1,0 +1,78 @@
+
+
+
+/* General body */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f4f8;
+  color: #333;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 20px;
+  background: #3498db;
+  color: white;
+  font-size: 2rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Main layout */
+.appContainer {
+  display: flex;
+  height: 500px;
+  width: 400px; 
+  gap: 2em;
+}
+
+/* Main area for widgets */
+/* .mainContent {
+  flex: 1;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+} */
+
+.sidebar {
+  width: 40px; /* thin tab */
+  background: #2c3e50;
+  color: white;
+  position: relative;
+  transition: width 0.3s;
+  overflow: hidden;
+}
+
+.sidebar:hover {
+  width: 200px; /* expand on hover */
+}
+
+.sidebar h3 {
+  margin: 20px;
+  font-size: 1.2rem;
+}
+
+.locationList {
+  list-style: none;
+  padding: 0 20px;
+  margin: 0;
+}
+
+.locationList li {
+  margin: 15px 0;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.locationList li:hover {
+  color: #3498db;
+}
+
+/* Loading message */
+.loadingDiv {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 50px;
+}
