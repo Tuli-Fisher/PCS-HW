@@ -1,0 +1,35 @@
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  font-family: "Georgia", serif;
+  background: #fff8f0; /* soft recipe-book beige */
+  min-height: 100vh;
+}
+
+.landing-container button {
+  padding: 14px 28px;
+  margin: 12px 0;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 12px;
+  background-color: #ffb26b; /* warm recipe-like orange */
+  color: #4a2f13;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.25s;
+  font-weight: bold;
+  width: 300px;        /* nice uniform width */
+  max-width: 80%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+
+.landing-container button:hover {
+  background-color: #ff9a3c;
+  transform: scale(1.03);
+}
+
+.landing-container button:active {
+  transform: scale(0.98);
+}
