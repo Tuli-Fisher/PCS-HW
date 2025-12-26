@@ -5,8 +5,16 @@ export default function App() {
   // const [backColor, setBackColor] = useState("#d3a6a6ff");
   // const [fontColor, setFontColor] = useState("#ff0000");
 
-  const [colors,setColors] = useState({fontColor:"#d3a6a6ff", backColor:"#ff0000"});
-  const [fontStyle, setFontStyle] = useState();
+  const [formColors, setFormColors] = useState({
+    fontColor: "rgba(82, 182, 149, 1)",
+    backColor: "#713e7eff",
+  });
+
+  const [colors, setColors] = useState({
+    fontColor: "#d3a6a6ff",
+    backColor: "#ff0000",
+  });
+  const [fontStyle, setFontStyle] = useState("Arial, sans-serif");
 
   const fonts = [
     "Arial, sans-serif",
@@ -15,8 +23,9 @@ export default function App() {
     "Courier New, monospace",
   ];
 
-  const handleSubmit = e =>{
-    setColors({...colors, [e.target.name]:e.target.value})
+  const handleSubmit = e => {
+    e.preventDefault();
+    setColors({ ...formColors });
   };
 
   return (
@@ -40,11 +49,25 @@ export default function App() {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>color:</label>
-          <input value={colors.fontColor} name="color" type="color" onChange={(e) => setColors({...colors,[e.target.name]:e.target.value})} />
+          <input
+            value={formColors.fontColor}
+            name="fontColor"
+            type="color"
+            onChange={(e) =>
+              setFormColors({ ...formColors, [e.target.name]: e.target.value })
+            }
+          />
         </div>
         <div className="form-group">
           <label>Background color:</label>
-          <input value={colors.backColor} name="backColor" type="color" onChange={(e) => setColors({...colors,[e.target.name]:e.target.value})} />
+          <input
+            value={formColors.backColor}
+            name="backColor"
+            type="color"
+            onChange={(e) =>
+              setFormColors({ ...formColors, [e.target.name]: e.target.value })
+            }
+          />
         </div>
         <button>ok</button>
       </form>
