@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,16 +7,29 @@
     <title>Pcs Blog</title>
   </head>
   <body>
-    <header id="header"> <span id="home">Home</span></header>
+    <header id="header"><span id="home">Home</span></header>
     <div id="main-container">
-      <button id="backButton" class="hide">Back</button>
+      <div class="controls-container">
+        <button id="backButton">← Back</button>
+        <select name="sort-select" id="sort-select">
+          <option value="aToz">sort by A to Z</option>
+          <option value="zToa">sort by Z to A</option>
+        </select>
+        <label for="search">
+          search:
+          <input type="text" />
+        </label>
+        <span
+          ><button id="reload-button">↺ Reload</button>
+          <span id="lastReloadTime"></span>
+        </span>
+      </div>
       <div class="users-container"></div>
       <div class="posts-container hide"></div>
-      
     </div>
     <aside id="left-aside"></aside>
     <aside id="right-aside"></aside>
-    <footer>Pcs blog       - est. 2025 -        tuli's studio</footer>
+    <footer>Pcs blog - est. 2025 - tuli's studio</footer>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

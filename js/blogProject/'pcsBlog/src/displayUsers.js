@@ -4,23 +4,34 @@ import { loadUsers } from "./laoder";
 const usersContainer = document.querySelector(".users-container");
 const postsContainer = document.querySelector(".posts-container");
 const backButton = document.querySelector("#backButton");
+const reloadButton = document.querySelector("#reload-button");
+const sortOrder = document.querySelector("#sort-select");
 
 let lastFunction = [];
+let currentFunction;
 
-export default async function displayUsers() {
-  let users = await loadUsers("https://jsonplaceholder.typicode.com/users");
-  Array.isArray(users) || (users = [users]);
+export default async function displayUsers(reload = false) {
+  currentFunction = displayUsers;
+
+  let users = await loadUsers(
+    "https://jsonplaceholder.typicode.com/users",
+    reload
+  );
 
   ///////check if this is empty
-  if(!users) {
-    errorMessage('error loading users');
+  if (!users) {
+    errorMessage("error loading users");
     return;
-  };
+  }
+
+  users = sortOutput(users);
+  Array.isArray(users) || (users = [users]);
 
   backButton.classList.add("hide");
   usersContainer.classList.remove("hide");
   postsContainer.classList.add("hide");
 
+  usersContainer.innerHTML = "";
   users.forEach((user) => {
     //console.log(user.name);
     const userDiv = document.createElement("div");
@@ -39,9 +50,16 @@ export default async function displayUsers() {
   });
 }
 
-async function displayPosts(userId, userName) {
-  let posts = await loadMoreInfo("posts", userId);
+async function displayPosts(userId, userName, reload) {
+  currentFunction = () => displayPosts(userId);
+
+  let posts = await loadMoreInfo("posts", userId, reload);
+  if(!posts){
+    errorMessage('error loading posts');
+    return;
+  }
   Array.isArray(posts) || (posts = [posts]);
+  posts = sortOutput(posts);
 
   //console.log("posts for user ", userId, posts);
   usersContainer.classList.add("hide");
@@ -66,9 +84,16 @@ async function displayPosts(userId, userName) {
   });
 }
 
-async function displayComments(postId) {
-  let posts = await loadMoreInfo("comments", postId);
+async function displayComments(postId, reload) {
+  currentFunction = () => displayComments(postId);
+
+  let posts = await loadMoreInfo("comments", postId, reload);
+  if(!posts){
+    errorMessage('error loading comments');
+    return;
+  }
   Array.isArray(posts) || (posts = [posts]);
+  posts = sortOutput(posts);
 
   postsContainer.innerHTML = `<h1>Heres what people think about post ${postId} -  `;
 
@@ -94,6 +119,52 @@ backButton.addEventListener("click", () => {
   last[0](...(last[1] || []));
 });
 
-function errorMessage(message){
-    usersContainer.innerHTML = `<h2 style="color:red;">${message}</h2>`;
-};
+reloadButton.addEventListener("click", async () => {
+  currentFunction(true);
+});
+
+sortOrder.addEventListener("change", async () => {
+  currentFunction();
+});
+
+function errorMessage(message) {
+  usersContainer.innerHTML = `<h2 style="color:red;">${message}</h2>`;
+}
+
+// function sortOutput(data) {
+//   if (!Array.isArray(data)) return;
+
+//   const sorted = [...data];
+
+//   if (sortOrder.value === "aToz") {
+//     sorted.sort((a, b) => a.name.localeCompare(b.name));
+//   }
+//   if (sortOrder.value === "zToa") {
+//     sorted.sort((a, b) => b.name.localeCompare(a.name));
+//   }
+//   return sorted;
+// }
+
+function sortOutput(data) {
+  if (!Array.isArray(data)) return;
+
+  const sorted = [...data];
+
+  const getFirstKey = obj => Object.keys(obj)[0]; // get the first key of the object
+
+  if (sortOrder.value === "aToz") {
+    sorted.sort((a, b) => {
+      const key = getFirstKey(a);
+      return String(a[key]).localeCompare(String(b[key]));
+    });
+  }
+
+  if (sortOrder.value === "zToa") {
+    sorted.sort((a, b) => {
+      const key = getFirstKey(a);
+      return String(b[key]).localeCompare(String(a[key]));
+    });
+  }
+
+  return sorted;
+}

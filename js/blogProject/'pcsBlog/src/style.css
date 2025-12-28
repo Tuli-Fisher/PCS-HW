@@ -21,6 +21,9 @@ body {
   align-items: center;
   justify-content: center;
 }
+#home{
+  cursor: pointer;
+}
 
 #main-container {
   grid-area: main-container;
@@ -68,6 +71,14 @@ footer {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+
+.controls-container{
+  display: flex;
+
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .hide {
