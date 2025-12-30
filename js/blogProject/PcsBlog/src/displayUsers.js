@@ -5,7 +5,8 @@ const usersContainer = document.querySelector(".users-container");
 const postsContainer = document.querySelector(".posts-container");
 const backButton = document.querySelector("#backButton");
 const reloadButton = document.querySelector("#reload-button");
-const sortOrder = document.querySelector("#sort-select");
+const sortButton = document.querySelector("#sort-select");
+const searchButton = document.querySelector('#search-button');
 
 let lastFunction = [];
 let currentFunction;
@@ -19,6 +20,7 @@ export default async function displayUsers(reload = false) {
   );
 
   ///////check if this is empty
+  // still needs work
   if (!users) {
     errorMessage("error loading users");
     return;
@@ -28,6 +30,7 @@ export default async function displayUsers(reload = false) {
   Array.isArray(users) || (users = [users]);
 
   backButton.classList.add("hide");
+  sortButton.classList.remove('hide');
   usersContainer.classList.remove("hide");
   postsContainer.classList.add("hide");
 
@@ -59,12 +62,16 @@ async function displayPosts(userId, userName, reload) {
     return;
   }
   Array.isArray(posts) || (posts = [posts]);
-  posts = sortOutput(posts);
+  //posts = sortOutput(posts);
 
   //console.log("posts for user ", userId, posts);
+
   usersContainer.classList.add("hide");
+  sortButton.classList.add('hide');
   backButton.classList.remove("hide");
   postsContainer.classList.remove("hide");
+
+
   postsContainer.innerHTML = `<h1>Heres what ${userName} has to say   `;
 
   posts.forEach((post) => {
@@ -123,7 +130,7 @@ reloadButton.addEventListener("click", async () => {
   currentFunction(true);
 });
 
-sortOrder.addEventListener("change", async () => {
+sortButton.addEventListener("change", async () => {
   currentFunction();
 });
 
@@ -131,40 +138,20 @@ function errorMessage(message) {
   usersContainer.innerHTML = `<h2 style="color:red;">${message}</h2>`;
 }
 
-// function sortOutput(data) {
-//   if (!Array.isArray(data)) return;
-
-//   const sorted = [...data];
-
-//   if (sortOrder.value === "aToz") {
-//     sorted.sort((a, b) => a.name.localeCompare(b.name));
-//   }
-//   if (sortOrder.value === "zToa") {
-//     sorted.sort((a, b) => b.name.localeCompare(a.name));
-//   }
-//   return sorted;
-// }
-
 function sortOutput(data) {
   if (!Array.isArray(data)) return;
 
   const sorted = [...data];
 
-  const getFirstKey = obj => Object.keys(obj)[0]; // get the first key of the object
-
-  if (sortOrder.value === "aToz") {
-    sorted.sort((a, b) => {
-      const key = getFirstKey(a);
-      return String(a[key]).localeCompare(String(b[key]));
-    });
+  if (sortButton.value === "aToz") {
+    sorted.sort((a, b) => a.name.localeCompare(b.name));
   }
-
-  if (sortOrder.value === "zToa") {
-    sorted.sort((a, b) => {
-      const key = getFirstKey(a);
-      return String(b[key]).localeCompare(String(a[key]));
-    });
+  if (sortButton.value === "zToa") {
+    sorted.sort((a, b) => b.name.localeCompare(a.name));
   }
-
   return sorted;
 }
+
+searchButton.addEventListener('click', async () =>{
+  let 
+});
