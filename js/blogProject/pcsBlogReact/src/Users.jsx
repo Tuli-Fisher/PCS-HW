@@ -1,5 +1,5 @@
 import React from "react";
-import { loadUsers } from "./loaders.js";
+import { loadUsers,loadMoreInfo } from "./loaders.js";
 import { useState } from "react";
 import { useEffect } from "react";
 
