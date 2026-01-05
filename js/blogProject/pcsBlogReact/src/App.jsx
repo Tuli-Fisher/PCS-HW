@@ -1,19 +1,21 @@
-import React from 'react'
-import './App.css'
-import { useState } from 'react'
-import Users from './Users.jsx';
-
+import React from "react";
+import "./App.css";
+import { useState } from "react";
+import Users from "./Users.jsx";
+import { Outlet } from "react-router";
 
 function App() {
-  const [page, setPage] = useState('users');
-
   return (
-    <>
+    <div id="app">
       <header>hello world</header>
-      <Users/>
+      <aside id="left-aside"></aside>
+      <div id="main-container">
+        <Outlet />
+      </div>
+      <aside id="right-aside"></aside>
       <footer>Pcs 2025</footer>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

@@ -28,9 +28,9 @@ function loadCache(key, addedTime) {
   return null;
 }
 
-export async function loadUsers(url, reloadOverride = false) {
+export async function loader(url, key, reloadOverride = false) {
   let userData;
-  const response = loadCache("users", userTime);
+  const response = loadCache(key, userTime);
 
   if (response === null || reloadOverride) {
     try {
@@ -40,29 +40,14 @@ export async function loadUsers(url, reloadOverride = false) {
         throw new Error(`${response.status} - ${response.statusText}`);
       }
       userData = await response.json();
-      displayLoadTime.innerHTML = `Last reload at: ${new Date().toLocaleTimeString(
-        "en-US",
-        {
-          hour: "numeric",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: true,
-        }
-      )}`;
-      saveCache("users", userData);
+      
+      saveCache(key, userData);
     } catch (e) {
       console.error("Error loading user data:", e);
     }
   } else {
     userData = response.data;
-    displayLoadTime.innerHTML = `Last reload at: ${new Date(
-      response.currentTime
-    ).toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: true,
-    })}`;
+   
   }
 
   return userData;
