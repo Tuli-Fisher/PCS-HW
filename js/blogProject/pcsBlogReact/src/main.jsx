@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import Users from "./Users.jsx";
 import Home from "./Home.jsx";
 import Posts from "./Posts.jsx";
-import Comments from './Comments.jsx';
+import Comments from "./Comments.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -14,13 +14,17 @@ createRoot(document.getElementById("root")).render(
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
-          <Route path="users" element={<Users />}>
+          {/* <Route path="users" element={<Users />}>
             <Route path=":userId/posts" element={<Posts />}>
               <Route path=":postId/comments" element={<Comments />}>
               </Route>
             </Route>
-          </Route>
-          <Route path='*' element={<h1>404 Not Found</h1>} />
+          </Route> */}
+          <Route path="users" element={<Users />} />
+          <Route path=":userId/posts" element={<Posts />} />
+          <Route path=":postId/comments" element={<Comments />} />
+          
+          <Route path="*" element={<h1>404 Not Found</h1>} />
         </Route>
       </Routes>
     </BrowserRouter>
