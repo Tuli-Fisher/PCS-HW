@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { loader } from "./laoders";
 import { useLocation, useParams } from "react-router";
+import SearchBar from "./SearchBar";
 
 export default function Comments() {
   const [comments, setComments] = useState([]);
+  const [searchVal, setSearchVal] = useState('');
 
   const { postId } = useParams();
   //const location = useLocation();
@@ -42,10 +44,17 @@ export default function Comments() {
     }
   }, []);
 
+  let filteredComments = comments.filter(
+    (comment) =>
+      comment.name.toLowerCase().includes(searchVal.toLowerCase()) ||
+      comment.body.toLowerCase().includes(searchVal.toLowerCase())
+  );
+
   return (
     <>
       <div>comments here</div>
-      {comments?.map((comment) => (
+      <SearchBar value={searchVal} onSearchChange={setSearchVal} />
+      {filteredComments?.map((comment) => (
         <div key={comment.id} className="post-card">
           <h2>{comment.name}</h2>
           <h4>{comment.email}</h4>
