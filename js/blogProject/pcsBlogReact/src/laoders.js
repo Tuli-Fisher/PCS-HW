@@ -30,9 +30,10 @@ function loadCache(key, addedTime) {
 
 export async function loader(url, key, reloadOverride = false) {
   let userData;
-  const response = loadCache(key, userTime);
+  let loadTime;
+  const cacheResponse = loadCache(key, userTime);
 
-  if (response === null || reloadOverride) {
+  if (cacheResponse === null || reloadOverride) {
     try {
       console.log("fetching user data");
       const response = await fetch(url);
@@ -40,17 +41,17 @@ export async function loader(url, key, reloadOverride = false) {
         throw new Error(`${response.status} - ${response.statusText}`);
       }
       userData = await response.json();
-      
+      loadTime = new Date();
       saveCache(key, userData);
     } catch (e) {
       console.error("Error loading user data:", e);
     }
   } else {
-    userData = response.data;
-   
+    userData = cacheResponse.data;
+    loadTime = cacheResponse.currentTime;
   }
 
-  return userData;
+  return {userData, loadTime};
 }
 
 export async function loadMoreInfo(type, Id, reloadOverride = false) {

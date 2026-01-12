@@ -7,7 +7,7 @@ export default function SearchBar(props) {
     if (window.history.length > 1) {
       navigate(-1);
     } else {
-      navigate("/users");
+      navigate("/");
     }
   };
   return (

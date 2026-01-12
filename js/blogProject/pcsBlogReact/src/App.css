@@ -21,6 +21,16 @@ header {
   align-items: center;
   justify-content: center;
 }
+
+header > a{
+  text-decoration: none;
+  color: rgb(10, 10, 145);
+}
+
+header > a:hover{
+  font-weight: bolder;
+}
+
 #home{
   cursor: pointer;
 }

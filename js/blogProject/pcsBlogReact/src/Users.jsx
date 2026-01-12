@@ -7,7 +7,8 @@ import SearchBar from "./SearchBar";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
-  const [searchVal, setSearchVal] = useState('');
+  const [searchVal, setSearchVal] = useState("");
+  const [reloadTime, setReloadTime] = useState("");
   //const [selectedUser, setSelectedUser] = useState(null);
 
   //const location = useLocation();
@@ -39,11 +40,14 @@ export default function Users() {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const users = await loader(
+        const { userData, loadTime } = await loader(
           "https://jsonplaceholder.typicode.com/users",
-          "users"
+          "users",
+          setReloadTime
         );
-        setUsers(users);
+        setUsers(userData);
+        setReloadTime(loadTime);
+        console.log(reloadTime);
       } catch (error) {
         console.error("error fetching users:", error);
       }
@@ -58,7 +62,6 @@ export default function Users() {
     navigate(`/${userId}/posts`);
   };
 
-
   let filteredUsers = users.filter(
     (user) =>
       user.name.toLowerCase().includes(searchVal.toLowerCase()) ||
@@ -68,6 +71,13 @@ export default function Users() {
   return (
     <>
       <h1>Users</h1>
+      {/* <h2>
+        {reloadTime?.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        })}
+      </h2> */}
       <SearchBar
         value={searchVal}
         onSearchChange={setSearchVal}

@@ -40,11 +40,11 @@ export default function Posts() {
   useEffect(() => {
     async function fetchPosts() {
       try {
-        const postResponse = await loader(
+        const {userData, loadTime} = await loader(
           `https://jsonplaceholder.typicode.com/posts?userId=${userId}`,
           `posts-${userId}`
         );
-        setPosts(postResponse);
+        setPosts(userData);
       } catch (error) {
         console.error("error fetching posts:", error);
       }

@@ -30,11 +30,11 @@ export default function Comments() {
   useEffect(() => {
     async function fetchPosts() {
       try {
-        const commentResponse = await loader(
+        const {userData} = await loader(
           `https://jsonplaceholder.typicode.com/comments?postId=${postId}`,
           `comments-${postId}`
         );
-        setComments(commentResponse);
+        setComments(userData);
       } catch (error) {
         console.error("error fetching comments:", error);
       }

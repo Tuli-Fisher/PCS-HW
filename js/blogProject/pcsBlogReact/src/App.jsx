@@ -1,17 +1,15 @@
 import React from "react";
 import "./App.css";
-import { Outlet, useNavigate } from "react-router";
+import { Link, Outlet, useNavigate } from "react-router";
 
 function App() {
   const navigate = useNavigate();
 
-  const homeClick = () =>{
-    navigate('/');
-  };
-
   return (
     <div id="app">
-      <header><span onClick={homeClick}>PCS BLOG</span></header>
+      <header>
+        <Link to={"/"}>PCS BLOG</Link>
+      </header>
       <aside id="left-aside"></aside>
       <div id="main-container">
         <Outlet />

@@ -7,44 +7,62 @@
     <title>Pcs Blog</title>
   </head>
   <body>
-    <header id="header"><span id="home">Home</span></header>
+    <section id="auth-section">
+        <div id="login-div">
+          <h2>Welcome to the PCS Blog</h2>
+          <h2>Please Log In Below</h2>
+          <label >
+            UserName:
+            <input type="text" id="userName" />
+          </label>
+          <label >
+            Password:
+            <input type="text" id="password" />
+          </label>
+          <button id="login-button">LOGIN</button>
 
-    <div id="main-container">
-      <div class="controls-container">
-        <button id="backButton" class="hide">← Back</button>
-        <select name="sort-select" id="sort-select">
-          <option value="aToz">sort by A to Z</option>
-          <option value="zToa">sort by Z to A</option>
-        </select>
-        <label for="search">
-          search:
-          <input type="text" id="search-input" />
-          <button id="search-button">🔎</button>
-          <button id="clear-button">Clear</button>
-        </label>
-        <span
-          ><button id="reload-button">↺ Reload</button>
-          <span id="lastReloadTime"></span>
-        </span>
+          <div>Username: testUser   Password: 123</div>
+        </div>
+    </section>
+    <section id="blog-section" class="hide">
+      <header id="header"><span id="home">Home</span></header>
+
+      <div id="main-container">
+        <div class="controls-container">
+          <button id="backButton" class="hide">← Back</button>
+          <select name="sort-select" id="sort-select">
+            <option value="aToz">sort by A to Z</option>
+            <option value="zToa">sort by Z to A</option>
+          </select>
+          <label for="search">
+            search:
+            <input type="text" id="search-input" />
+            <button id="search-button">🔎</button>
+            <button id="clear-button">Clear</button>
+          </label>
+          <span
+            ><button id="reload-button">↺ Reload</button>
+            <span id="lastReloadTime"></span>
+          </span>
+        </div>
+
+        <div class="users-container">
+          <!-- users info will go here -->
+        </div>
+
+        <div class="posts-container hide">
+          <!-- posts info will go here -->
+        </div>
+
+        <span id="loadMore-span"></span>
       </div>
 
-      <div class="users-container">
-        <!-- users info will go here -->
-      </div>
+      <aside id="left-aside"></aside>
 
-      <div class="posts-container hide">
-        <!-- posts info will go here -->
-      </div>
+      <aside id="right-aside"></aside>
 
-      <span id="loadMore-span"></span>
-
-    </div>
-
-    <aside id="left-aside"></aside>
-
-    <aside id="right-aside"></aside>
-
-    <footer>Pcs blog - est. 2025 - tuli's studio</footer>
+      <footer>Pcs blog - est. 2025 - tuli's studio</footer>
+    </section>
 
     <script type="module" src="/src/main.js"></script>
   </body>

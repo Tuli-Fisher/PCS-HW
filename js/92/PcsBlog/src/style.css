@@ -1,4 +1,32 @@
-body {
+#auth-section{
+  width: 100vw;
+  height: 100vh;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgb(186, 216, 226);
+}
+
+#auth-section.hide{
+  display: none;
+}
+
+#login-div{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: rgb(47, 118, 199);
+
+  padding: 2em;
+
+}
+
+#blog-section {
   margin: 0;
   padding: 0;
 
@@ -13,6 +41,9 @@ body {
   grid-template-columns: 1fr 6fr 1fr;
 }
 
+#blog-section.hide{
+  display: none;
+}
 #header {
   grid-area: header;
   background-color: lightblue;
