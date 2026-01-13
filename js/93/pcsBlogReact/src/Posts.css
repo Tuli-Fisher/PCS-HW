@@ -1,0 +1,14 @@
+.post-card {
+  border: solid 3px darkblue;
+  border-radius: 10px;
+
+  margin: 1em 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  
+  height: 100px; /* Fixed height of 100px */
+  overflow: hidden; /* Prevents content from overflowing */
+}

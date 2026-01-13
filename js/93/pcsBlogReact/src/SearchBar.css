@@ -1,0 +1,9 @@
+.search-div{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-around;
+    background-color: lightblue;
+
+    padding: .5em;
+}
