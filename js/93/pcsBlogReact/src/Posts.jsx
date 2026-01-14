@@ -5,16 +5,18 @@ import "./Posts.css";
 
 export default function Posts() {
   const [posts, setPosts] = useState([]);
-  const { searchVal, setLastReload } = useOutletContext();
+  const { searchVal, setLastReload, reloadSignal, setReloadSignal } =
+    useOutletContext();
 
   const { userId } = useParams();
 
   useEffect(() => {
-    async function fetchPosts() {
+    async function fetchPosts(reload = false) {
       try {
         const { userData, loadTime } = await loader(
           `https://jsonplaceholder.typicode.com/posts?userId=${userId}`,
-          `posts-${userId}`
+          `posts-${userId}`,
+          reload
         );
         setPosts(userData);
         setLastReload(loadTime);
@@ -22,10 +24,17 @@ export default function Posts() {
         console.error("error fetching posts:", error);
       }
     }
+
+
     if (userId) {
-      fetchPosts();
+      if (reloadSignal) {
+        fetchPosts(true);
+        setReloadSignal(false);
+      } else {
+        fetchPosts();
+      }
     }
-  }, [userId]);
+  }, [userId, setLastReload, reloadSignal, setReloadSignal]);
 
   const navigate = useNavigate();
 

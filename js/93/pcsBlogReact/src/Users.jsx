@@ -2,21 +2,19 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { loader } from "./laoders";
 import "./Users.css";
-import {
-  useNavigate,
-  useOutletContext,
-} from "react-router";
+import { useNavigate, useOutletContext } from "react-router";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
-  const { searchVal, setLastReload } = useOutletContext();
+  const { searchVal, setLastReload, reloadSignal, setReloadSignal } = useOutletContext();
 
   useEffect(() => {
-    async function fetchUsers() {
+    async function fetchUsers(reload = false) {
       try {
         const { userData, loadTime } = await loader(
           "https://jsonplaceholder.typicode.com/users",
-          "users"
+          "users",
+          reload
         );
         setUsers(userData);
         setLastReload(loadTime);
@@ -24,8 +22,14 @@ export default function Users() {
         console.error("error fetching users:", error);
       }
     }
-    fetchUsers();
-  }, []);
+    if(reloadSignal){
+      fetchUsers(true);
+      setReloadSignal(false)
+    }else{
+      fetchUsers();
+    }
+    
+  }, [setLastReload, reloadSignal, setReloadSignal]);
 
   const navigate = useNavigate();
 

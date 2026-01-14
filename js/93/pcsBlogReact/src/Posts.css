@@ -1,6 +1,5 @@
 .post-card {
-  border: solid 3px darkblue;
-  border-radius: 10px;
+  border-top: solid 3px darkblue;
 
   margin: 1em 12px;
 

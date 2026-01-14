@@ -4,17 +4,18 @@ import { useOutletContext, useParams } from "react-router";
 
 export default function Comments() {
   const [comments, setComments] = useState([]);
-  const {searchVal, setLastReload} = useOutletContext();
+  const { searchVal, setLastReload, reloadSignal, setReloadSignal } =
+    useOutletContext();
 
   const { postId } = useParams();
- 
 
   useEffect(() => {
-    async function fetchPosts() {
+    async function fetchPosts(reload = false) {
       try {
-        const {userData, loadTime} = await loader(
+        const { userData, loadTime } = await loader(
           `https://jsonplaceholder.typicode.com/comments?postId=${postId}`,
-          `comments-${postId}`
+          `comments-${postId}`,
+          reload
         );
         setComments(userData);
         setLastReload(loadTime);
@@ -23,9 +24,14 @@ export default function Comments() {
       }
     }
     if (postId) {
-      fetchPosts();
+      if (reloadSignal) {
+        fetchPosts(true);
+        setReloadSignal(false);
+      } else {
+        fetchPosts();
+      }
     }
-  }, [postId]);
+  }, [postId, setLastReload, reloadSignal, setReloadSignal]);
 
   let filteredComments = comments.filter(
     (comment) =>
@@ -35,7 +41,7 @@ export default function Comments() {
 
   return (
     <>
-       <div
+      <div
         style={{
           display: "flex",
           flexDirection: "row",
