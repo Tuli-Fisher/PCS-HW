@@ -25,7 +25,8 @@ export default function AddDisplay() {
         display:'flex',
         justifyContent:'center',
         alignContent:'center',
-        height:'5em'
+        height:'5em',
+        color:'red'
     }}><h1>{display}</h1></div>
   )
 }

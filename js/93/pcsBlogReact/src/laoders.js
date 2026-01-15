@@ -86,3 +86,16 @@ function clearExpiredCache() {
     cleanedUpLocalStorage = true;
   });
 }
+
+export async function loadUser(userId) {
+  try {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/users?id=${userId}`);
+    if (!response.ok) {
+      throw new Error(`${response.status} - ${response.statusText}`);
+    }
+    let user = await response.json();
+    return user[0];
+  } catch (e) {
+    console.error("Error loading user data:", e);
+  }
+}
