@@ -1,9 +1,8 @@
 \node_modules
 \.eslintrc.json
 
-eslint.config.mjs
+
 js/73/videos
 .env
 node_modules/
-dist/
 .vite/
