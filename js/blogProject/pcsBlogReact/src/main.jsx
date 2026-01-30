@@ -10,7 +10,7 @@ import Comments from "./Comments.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/portfolio/pcsBlogReact">
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
