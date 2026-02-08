@@ -1,1 +1,1 @@
-console.log("Hello, World! and lets see if nodemon works");
+console.log("HELLO WORLD");
