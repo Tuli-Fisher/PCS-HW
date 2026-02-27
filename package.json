@@ -22,6 +22,7 @@
     "globals": "^16.3.0"
   },
   "dependencies": {
+    "express-generator": "^4.16.1",
     "through2-map": "^4.0.0"
   }
 }
