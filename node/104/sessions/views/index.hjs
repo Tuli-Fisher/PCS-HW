@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>{{ title }}</h1>
+    <p>Welcome to {{ title }}</p>
+    <p>Hey {{userName}}! you have visited {{count}} times</p>
+
+    <form method="POST">
+      <label>name: <input name="userName" required></label>
+    
+      <button type="submit">submit</button>
+    </form>
+  </body>
+</html>
